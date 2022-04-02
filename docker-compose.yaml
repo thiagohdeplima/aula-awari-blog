@@ -1,0 +1,26 @@
+# https://docs.docker.com/compose/
+
+version: "3"
+
+volumes:
+  database:
+
+networks:
+  awari:
+
+services:
+  database:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+    networks:
+    - awari
+    volumes:
+    - database:/var/lib/mysql:rw
+  
+  api:
+    build: .
+    networks:
+    - awari
+    volumes:
+    - .:/srv/app
