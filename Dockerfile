@@ -1,5 +1,15 @@
-FROM node:lts-alpine
+FROM node:lts-alpine AS build
 
-COPY index.js .
+WORKDIR /srv/app
 
-CMD ["sleep", "infinity"]
+COPY . .
+
+RUN apk add -vu curl
+
+RUN npm install
+
+RUN adduser -DH unprivileged
+
+USER unprivileged
+
+CMD ["node", "index"]
