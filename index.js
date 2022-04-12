@@ -3,11 +3,11 @@ var express = require("express");
 const knex = require('knex')({
     client: 'mysql2',
     connection: {
-        host: 'database',
-        port: 3306,
-        user: 'root',
-        password: '123456',
-        database: 'blog'
+        host: process.env.DATABASE_HOST,
+        port: process.env.DATABASE_PORT,
+        user: process.env.DATABASE_USERNAME,
+        password: process.env.DATABASE_PASS,
+        database: process.env.DATABASE_NAME
     }
 });
 
@@ -34,4 +34,4 @@ server.post("/posts", function(request, response) {
     response.json({message: "Hello World 2"});
 });
 
-server.listen(3000);
+server.listen(4000);
