@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/thiagohdeplima/aula-awari-blog#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "knex": "^1.0.6",
+    "mysql2": "^2.3.3"
   }
 }
