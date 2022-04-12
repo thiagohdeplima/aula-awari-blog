@@ -14,14 +14,18 @@ const knex = require('knex')({
 var server = express();
 
 server.get("/posts", function(request, response) {
-    console.log(knex.select().from('posts').first());
+    knex
+        .select()
+        .from('posts')
+        .then(function(rows) {
+            response.json(rows);
+        })
+        .catch(function(error) {
+            console.log(error);
 
-    response.json({
-        entries: [
-            { title: "O Teorema CAP #1", content: "Lorem ipsum dolor Lorem ipsum dolorLorem ipsum dolor Lorem ipsum dolor" },
-            { title: "O Teorema CAP #2", content: "Lorem ipsum dolor Lorem ipsum dolorLorem ipsum dolor Lorem ipsum dolor" },
-        ]
-    });
+            response.status(500);
+            response.json({error: "Something went wrong"});
+        });
 });
 
 server.post("/posts", function(request, response) {
