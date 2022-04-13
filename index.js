@@ -34,4 +34,4 @@ server.post("/posts", function(request, response) {
     response.json({message: "Hello World 2"});
 });
 
-server.listen(4000);
+server.listen(3000);
