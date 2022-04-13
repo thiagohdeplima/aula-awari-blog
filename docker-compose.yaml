@@ -26,3 +26,9 @@ services:
     - awari
     volumes:
     - .:/srv/app
+    environment:
+      DATABASE_HOST: database
+      DATABASE_PORT: "3306"
+      DATABASE_USERNAME: root
+      DATABASE_PASS: "123456"
+      DATABASE_NAME: "blog"
