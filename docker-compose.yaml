@@ -19,7 +19,9 @@ services:
     - database:/var/lib/mysql:rw
   
   api:
-    build: .
+    build:
+      context: .
+      target: build
     ports:
     - 4500:3000
     networks:
