@@ -8,7 +8,10 @@ const knex = require('knex')({
         user: process.env.DATABASE_USERNAME,
         password: process.env.DATABASE_PASS,
         database: process.env.DATABASE_NAME
-    }
+    },
+    migrations: {
+        directory: 'migrations',
+    },
 });
 
 var server = express();
