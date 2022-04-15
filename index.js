@@ -16,6 +16,8 @@ const knex = require('knex')({
 
 var server = express();
 
+server.use(express.json());
+
 server.get("/posts", function(request, response) {
     knex
         .select()
