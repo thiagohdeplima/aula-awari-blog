@@ -34,9 +34,18 @@ server.get("/posts", function(request, response) {
 });
 
 server.post("/posts", function(request, response) {
-    console.log(request.json())
+    knex("posts")
+        .insert(request.body)
+        .then(function(id) {
+            response.status(201)
+            response.json({id: id})
+        })
+        .catch(function(error) {
+            console.log(error);
 
-    response.json({message: "Hello World 2"});
+            response.status(500);
+            response.json({error: "Something went wrong"});
+        })
 });
 
 server.listen(3000);
