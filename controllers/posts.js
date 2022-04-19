@@ -30,4 +30,20 @@ Get = function(request, response) {
         });
 };
 
-module.exports = { Get, Post };
+GetById = function(request, response) {
+    knex
+        .select()
+        .from('posts')
+        .where("id", request.params.id)
+        .then(function(articles) {
+            if(articles.length == 0) {
+                response.status(404)
+                response.json({message: "The article you requested does not exists"})
+            }
+            else {
+                response.json(articles[0]);
+            }
+        })
+}
+
+module.exports = { Get, Post, GetById };
