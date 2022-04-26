@@ -1,6 +1,6 @@
 # https://docs.docker.com/compose/
 
-version: "3"
+version: "3.7"
 
 volumes:
   database:
@@ -11,6 +11,7 @@ networks:
 services:
   database:
     image: mysql:8
+    platform: linux/amd64
     environment:
       MYSQL_ROOT_PASSWORD: "123456"
     networks:
@@ -34,3 +35,8 @@ services:
       DATABASE_USERNAME: root
       DATABASE_PASS: "123456"
       DATABASE_NAME: "blog"
+
+  redis:
+    image: redis:alpine
+    networks:
+    - awari
