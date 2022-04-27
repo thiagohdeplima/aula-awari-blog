@@ -1,4 +1,5 @@
 const knex = require("../knex")
+const model = require("../models/post")
 
 Post = function(request, response) {
     knex("posts")
@@ -31,19 +32,14 @@ Get = function(request, response) {
 };
 
 GetById = function(request, response) {
-    knex
-        .select()
-        .from('posts')
-        .where("id", request.params.id)
-        .then(function(articles) {
-            if(articles.length == 0) {
-                response.status(404)
-                response.json({message: "The article you requested does not exists"})
-            }
-            else {
-                response.json(articles[0]);
-            }
-        })
+    post = model.GetPostById(request.params.id)
+
+    if(post === undefined) {
+        response.status(404)
+        response.json({message: "The article you requested does not exists"})
+    } else {
+        response.json(post);
+    }
 }
 
 module.exports = { Get, Post, GetById };
